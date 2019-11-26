@@ -14,10 +14,8 @@ Rules. You cannot look at how others have completed theirs in order to make your
 
 * Design a single screened app with three switches.
 * Each switch will be connected with the others. Only 2 switches can be
-on at the same time. Turning on a third will turn off another switch.
-* The switch that's turned off will always be the previous switch in the list. If the first
-switch is turned on and needs to turn off a switch, the last switch is the 
-one that gets turned off.
+on at the same time. Turning on a third will turn off another switch chosen at random.
+
 * The switches need to be green, blue, and red respectively.
 * They should be centered and evenly spaced.
 * The words GOOD, CHEAP, and FAST should be next to the switches, one word per switch.

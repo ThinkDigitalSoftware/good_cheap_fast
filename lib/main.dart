@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -47,10 +48,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
                   children: <Widget>[
                     Switch(
-                      value: _toggleState[1],
+                      value: _toggleState[0],
                       onChanged: (value) {
                         setState(() {
-                          _toggleState[1] = value;
+                          _toggleState[0] = value;
                         });
                       },
                       activeColor: Colors.green,
@@ -69,10 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
                   children: <Widget>[
                     Switch(
-                      value: _toggleState[2],
+                      value: _toggleState[1],
                       onChanged: (value) {
                         setState(() {
-                          _toggleState[2] = value;
+                          _toggleState[1] = value;
                         });
                       },
                       activeColor: Colors.blue[800],
@@ -91,10 +92,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
                   children: <Widget>[
                     Switch(
-                      value: _toggleState[3],
+                      value: _toggleState[2],
                       onChanged: (value) {
                         setState(() {
-                          _toggleState[3] = value;
+                          _toggleState[2] = value;
                         });
                       },
                       activeColor: Colors.red[800],
@@ -118,9 +119,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class ToggleState extends MapBase<int, bool> {
   final Map<int, bool> _toggleState = {
+    0: false,
     1: false,
     2: false,
-    3: false,
   };
 
   @override
@@ -131,11 +132,7 @@ class ToggleState extends MapBase<int, bool> {
   @override
   void operator []=(key, value) {
     if (value && values.where((value) => value).length >= 2) {
-      if (key == 1) {
-        _toggleState[3] = false;
-      } else {
-        _toggleState[key - 1] = false;
-      }
+      _deactivateRandom(key);
     }
     _toggleState[key] = value;
   }
@@ -148,4 +145,12 @@ class ToggleState extends MapBase<int, bool> {
 
   @override
   remove(Object key) => _toggleState.remove(key);
+
+  void _deactivateRandom(int key) {
+    int indexToDeactivate;
+    do {
+      indexToDeactivate = Random().nextInt(3);
+    } while (indexToDeactivate == key);
+    _toggleState[indexToDeactivate] = false;
+  }
 }
